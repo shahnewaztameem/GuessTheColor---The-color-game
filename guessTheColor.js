@@ -1,17 +1,17 @@
-var colors = generateRandomColors(6);
-
+//keep track the squars
+var numberOfSquares = 6;
+var colors = generateRandomColors(numberOfSquares);
 //select squars
 var squars = document.querySelectorAll(".square");
 //select colordisplay
 var colorDisplay = document.getElementById("colorDisplay");
 //random color  picked up
 var pickedColor = pickColor();
-
 //selector for message display
 var messageDisplay = document.querySelector("#message");
-
 //select reset button
 var resetButton = document.getElementById("reset");
+
 
 //diffculty buttons
 var easyMode = document.querySelector("#easyMode");
@@ -20,19 +20,37 @@ var hardMode = document.querySelector("#hardMode");
 easyMode.addEventListener("click",function(){
 	easyMode.classList.add("selected");
 	hardMode.classList.remove("selected");
-	colors = generateRandomColors(3);
+	numberOfSquares = 3;
+	colors = generateRandomColors(numberOfSquares);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
+	for(var i = 0; i < squars.length; i++) {
+		if(colors[i]){
+			squars[i].style.backgroundColor = colors[i];
+		}
+		else {
+			squars[i].style.display = "none";
+		}
+	}
 });
 
 hardMode.addEventListener("click",function(){
 	easyMode.classList.remove("selected");
 	hardMode.classList.add("selected");
+	numberOfSquares = 6;
+	colors = generateRandomColors(numberOfSquares);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for(var i = 0; i < squars.length; i++) {
+		squars[i].style.backgroundColor = colors[i];
+		squars[i].style.display = "block";
+	}
 });
 //reset to random color after clicking
 resetButton.addEventListener("click",function(){
 	//generate all new colors
-	colors = generateRandomColors(6);
+	//console.log(numberOfSquares);
+	colors = generateRandomColors(numberOfSquares);
 	
 	//pick new colors from array
 	pickedColor = pickColor();
@@ -44,7 +62,7 @@ resetButton.addEventListener("click",function(){
 	for(var i = 0; i < colors.length; i++){
 		squars[i].style.backgroundColor = colors[i];
 	}
-	h1.style.backgroundColor = "#232323";
+	h1.style.backgroundColor = "steelblue";
 });
 
 //clicking reset button will reset colors
