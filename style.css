@@ -18,6 +18,13 @@ h1 {
 #colorDisplay {
 	text-transform: uppercase;
 }
-span {
-	color: #fff;
+
+#stripe {
+	background-color: #fff;
+	height: 30px;
+	text-align: center;
+	color: #000;
+}
+.selected{
+	background-color: deepskyblue;
 }

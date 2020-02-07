@@ -10,6 +10,45 @@ var pickedColor = pickColor();
 //selector for message display
 var messageDisplay = document.querySelector("#message");
 
+//select reset button
+var resetButton = document.getElementById("reset");
+
+//diffculty buttons
+var easyMode = document.querySelector("#easyMode");
+var hardMode = document.querySelector("#hardMode");
+
+easyMode.addEventListener("click",function(){
+	easyMode.classList.add("selected");
+	hardMode.classList.remove("selected");
+	colors = generateRandomColors(3);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+});
+
+hardMode.addEventListener("click",function(){
+	easyMode.classList.remove("selected");
+	hardMode.classList.add("selected");
+});
+//reset to random color after clicking
+resetButton.addEventListener("click",function(){
+	//generate all new colors
+	colors = generateRandomColors(6);
+	
+	//pick new colors from array
+	pickedColor = pickColor();
+	
+	//change color display to matched picked color
+	colorDisplay.textContent = pickedColor;
+	
+	//change colors of the squares
+	for(var i = 0; i < colors.length; i++){
+		squars[i].style.backgroundColor = colors[i];
+	}
+	h1.style.backgroundColor = "#232323";
+});
+
+//clicking reset button will reset colors
+
 var h1 = document.querySelector("h1");
 
 colorDisplay.textContent = pickedColor;
@@ -22,6 +61,9 @@ for(var i = 0; i < squars.length; i++){
 		var clickedColor = this.style.backgroundColor;
 		if(clickedColor === pickedColor){
 			messageDisplay.textContent = "Correct!";
+			
+			//change reset button text after guessing correct
+			resetButton.textContent = "Play Again?";
 			changeColor(clickedColor);
 			h1.style.backgroundColor = clickedColor;
 		}
